@@ -213,6 +213,9 @@
      <None Include="Assets\LeapMotion\Widgets\Shaders\SelfIllumAlpha.shader" />
      <None Include="Assets\LeapMotion\Version.txt" />
      <None Include="Assets\Plugins\x86\donotdelete.txt" />
+ <Reference Include="Assembly-UnityScript-firstpass">
+ <HintPath>E:/Github/ClubJam2015/Club Jam 2015/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -230,10 +233,8 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{220C4EE1-465F-35D5-F1EE-228EBBF6DF16}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
-    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
-      <Project>{D3273DCA-4530-CC1D-0AB7-2E9361FC8929}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
+      <Project>{220C4EE1-465F-35D5-F1EE-228EBBF6DF16}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
