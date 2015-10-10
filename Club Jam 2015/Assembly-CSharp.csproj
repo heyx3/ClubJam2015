@@ -47,12 +47,16 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Game\Scripts\Animation\MoveTowards.cs" />
+     <Compile Include="Assets\Game\Scripts\Game Flow\AI.cs" />
+     <Compile Include="Assets\Game\Scripts\Game Flow\Buttons\ElementChoiceButton.cs" />
      <Compile Include="Assets\Game\Scripts\Game Flow\Buttons\TestButton.cs" />
      <Compile Include="Assets\Game\Scripts\Game Flow\Elements.cs" />
+     <Compile Include="Assets\Game\Scripts\Game Flow\PrefabAndInstanceContainer.cs" />
      <Compile Include="Assets\Game\Scripts\Game Flow\State Machine\ChooseElementsState.cs" />
      <Compile Include="Assets\Game\Scripts\Game Flow\State Machine\GameFSM.cs" />
      <Compile Include="Assets\Game\Scripts\Game Flow\State Machine\GameState.cs" />
      <Compile Include="Assets\Game\Scripts\Input\Button.cs" />
+     <Compile Include="Assets\Game\Scripts\Input\ConstLaserPointer.cs" />
      <Compile Include="Assets\Game\Scripts\Input\InputController.cs" />
      <Compile Include="Assets\Game\Scripts\Input\KinematicsTracker.cs" />
      <Compile Include="Assets\Game\Scripts\Singleton.cs" />

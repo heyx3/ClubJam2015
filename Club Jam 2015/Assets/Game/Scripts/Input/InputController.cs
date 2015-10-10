@@ -12,11 +12,16 @@ public class InputController : Singleton<InputController>
 
 	public KinematicsTracker[] Trackers = new KinematicsTracker[2] { null, null };
 	public HandController HandControls;
+	public GameObject LaserPointerHandPrefab;
 
 	public float GestureDuration = 0.1f;
 	public float VelThreshold = 0.9f;
 
 	public float CalmTime = 0.6f;
+
+
+	public delegate void GestureReaction(KinematicsTracker palmTracker);
+	public event GestureReaction OnSweepSideways, OnSweepVertical, OnSweepForward;
 
 
 	private float[] trackerCalmTime = new float[2] { 0.0f, 0.0f };
@@ -31,6 +36,10 @@ public class InputController : Singleton<InputController>
 		{
 			Debug.LogError("'HandControls' in 'InputController' component is null!");
 		}
+		if (LaserPointerHandPrefab == null)
+		{
+			Debug.LogError("'LaserPointerHandPrefab' is null!");
+		}
 
 		HandControls.onCreateHand += (handModel =>
 			{
@@ -38,6 +47,8 @@ public class InputController : Singleton<InputController>
 				{
 					return;
 				}
+
+				Instantiate<GameObject>(LaserPointerHandPrefab).transform.parent = handModel.palm;
 
 				KinematicsTracker tracker = handModel.palm.gameObject.AddComponent<KinematicsTracker>();
 				if (Trackers[0] == null)

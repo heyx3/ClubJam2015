@@ -4,12 +4,9 @@ using UnityEngine;
 
 public abstract class GameState
 {
-	public GameFSM Owner;
+	protected GameFSM FSM { get { return GameFSM.Instance; } }
 
-	protected int CurrentPlayer { get { return Owner.CurrentPlayer; } set { Owner.CurrentPlayer = value; } }
-
-
-	public GameState(GameFSM owner) { Owner = owner; }
+	protected int CurrentPlayer { get { return FSM.CurrentPlayer; } set { FSM.CurrentPlayer = value; } }
 
 
 	public virtual void Update() { }
