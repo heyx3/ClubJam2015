@@ -8,9 +8,12 @@ using System.Linq;
 /// </summary>
 public class InputController : Singleton<InputController>
 {
+	private static Vector2 Horz(Vector3 v) { return new Vector2(v.x, v.z); }
+
 	public KinematicsTracker.DebugData Debugging = new KinematicsTracker.DebugData();
 
-	public KinematicsTracker[] Trackers = new KinematicsTracker[2] { null, null };
+	public KinematicsTracker[] PalmTrackers = new KinematicsTracker[2] { null, null };
+	public KinematicsTracker[] FingerTrackers = new KinematicsTracker[2] { null, null };
 	public HandController HandControls;
 	public GameObject LaserPointerHandPrefab;
 
@@ -19,13 +22,16 @@ public class InputController : Singleton<InputController>
 
 	public float CalmTime = 0.6f;
 
+	public float FistCloseDistThreshold = 0.07f;
+	public float CloseFistTime = 0.65f;
+
 
 	public delegate void GestureReaction(KinematicsTracker palmTracker);
-	public event GestureReaction OnSweepSideways, OnSweepVertical, OnSweepForward;
+	public event GestureReaction OnSweepSideways, OnSweepVertical, OnSweepForward, OnCloseFist;
 
 
+	private float[] fistCloseTime = new float[2] { 0.0f, 0.0f };
 	private float[] trackerCalmTime = new float[2] { 0.0f, 0.0f };
-
 
 
 	protected override void Awake()
@@ -50,22 +56,27 @@ public class InputController : Singleton<InputController>
 
 				Instantiate<GameObject>(LaserPointerHandPrefab).transform.parent = handModel.palm;
 
-				KinematicsTracker tracker = handModel.palm.gameObject.AddComponent<KinematicsTracker>();
-				if (Trackers[0] == null)
+				KinematicsTracker palmTrack = handModel.palm.gameObject.AddComponent<KinematicsTracker>(),
+								  fingerTrack = handModel.fingers[2].bones[FingerModel.NUM_BONES - 1].gameObject.AddComponent<KinematicsTracker>();
+				if (PalmTrackers[0] == null)
 				{
-					Trackers[0] = tracker;
+					PalmTrackers[0] = palmTrack;
+					FingerTrackers[0] = fingerTrack;
 					trackerCalmTime[0] = CalmTime;
+					fistCloseTime[0] = 0.0f;
 				}
 				else
 				{
-					if (Trackers[1] != null)
+					if (PalmTrackers[1] != null)
 					{
 						Debug.LogError("More than two hands!");
 					}
 					else
 					{
-						Trackers[1] = tracker;
+						PalmTrackers[1] = palmTrack;
+						FingerTrackers[1] = fingerTrack;
 						trackerCalmTime[1] = CalmTime;
+						fistCloseTime[1] = 0.0f;
 					}
 				}
 			});
@@ -73,30 +84,44 @@ public class InputController : Singleton<InputController>
 
 	void Update()
 	{
-		for (int i = 0; i < Trackers.Length; ++i)
+		for (int i = 0; i < PalmTrackers.Length; ++i)
 		{
-			KinematicsTracker tracker = Trackers[i];
-			if (tracker != null)
+			KinematicsTracker palmT = PalmTrackers[i],
+							  fingerT = FingerTrackers[i];
+			if (palmT != null)
 			{
-				tracker.Debugging = Debugging;
+				palmT.Debugging = Debugging;
 
 				if (trackerCalmTime[i] <= 0.0f)
 				{
-					Vector3 avgVel = tracker.GetAverageVelocity(GestureDuration);
+					Vector3 avgVel = palmT.GetAverageVelocity(GestureDuration);
+					Vector3 palmPos = palmT.PositionLogs[palmT.GetLogIndex(0)],
+							fingerPos = fingerT.PositionLogs[fingerT.GetLogIndex(0)];
+
 					if (Mathf.Abs(avgVel.x) >= VelThreshold)
 					{
-						SweepSideGesture(tracker, avgVel.x);
+						SweepSideGesture(palmT);
 						trackerCalmTime[i] = CalmTime;
 					}
 					else if (Mathf.Abs(avgVel.y) >= VelThreshold)
 					{
-						SweepVerticalGesture(tracker, avgVel.y);
+						SweepVerticalGesture(palmT);
 						trackerCalmTime[i] = CalmTime;
 					}
 					else if (Mathf.Abs(avgVel.z) >= VelThreshold)
 					{
-						SweepForwardGesture(tracker, avgVel.z);
+						SweepForwardGesture(palmT);
 						trackerCalmTime[i] = CalmTime;
+					}
+					else if ((Horz(palmPos) - Horz(fingerPos)).sqrMagnitude <= (FistCloseDistThreshold * FistCloseDistThreshold))
+					{
+						fistCloseTime[i] += Time.deltaTime;
+						if (fistCloseTime[i] >= CloseFistTime)
+						{
+							fistCloseTime[i] = 0.0f;
+							trackerCalmTime[i] = CalmTime;
+							FistCloseGesture(palmT);
+						}
 					}
 				}
 				else
@@ -106,22 +131,24 @@ public class InputController : Singleton<InputController>
 			}
 		}
 	}
-	private void SweepSideGesture(KinematicsTracker tracker, float vel)
+	private void SweepSideGesture(KinematicsTracker tracker)
 	{
-		GameState state = GameFSM.Instance.CurrentState;
-		if (state != null)
-			state.OnSweepSideways(tracker, vel, GestureDuration);
+		if (OnSweepSideways != null)
+			OnSweepSideways(tracker);
 	}
-	private void SweepVerticalGesture(KinematicsTracker tracker, float vel)
+	private void SweepVerticalGesture(KinematicsTracker tracker)
 	{
-		GameState state = GameFSM.Instance.CurrentState;
-		if (state != null)
-			state.OnSweepVertical(tracker, vel, GestureDuration);
+		if (OnSweepVertical != null)
+			OnSweepVertical(tracker);
 	}
-	private void SweepForwardGesture(KinematicsTracker tracker, float vel)
+	private void SweepForwardGesture(KinematicsTracker tracker)
 	{
-		GameState state = GameFSM.Instance.CurrentState;
-		if (state != null)
-			state.OnSweepForward(tracker, vel, GestureDuration);
+		if (OnSweepForward != null)
+			OnSweepForward(tracker);
+	}
+	private void FistCloseGesture(KinematicsTracker tracker)
+	{
+		if (OnCloseFist != null)
+			OnCloseFist(tracker);
 	}
 }

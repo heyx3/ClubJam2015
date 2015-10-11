@@ -46,16 +46,27 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
      <Compile Include="Assets\FadeToSkybox\FadeToSkybox.cs" />
+=======
+     <Compile Include="Assets\Game\Scripts\Animation\Hover.cs" />
+>>>>>>> refs/remotes/heyx3/master
      <Compile Include="Assets\Game\Scripts\Animation\MoveTowards.cs" />
      <Compile Include="Assets\Game\Scripts\Game Flow\AI.cs" />
      <Compile Include="Assets\Game\Scripts\Game Flow\Buttons\ElementChoiceButton.cs" />
      <Compile Include="Assets\Game\Scripts\Game Flow\Buttons\TestButton.cs" />
+     <Compile Include="Assets\Game\Scripts\Game Flow\Card.cs" />
+     <Compile Include="Assets\Game\Scripts\Game Flow\CardBehavior.cs" />
+     <Compile Include="Assets\Game\Scripts\Game Flow\CardComponent.cs" />
      <Compile Include="Assets\Game\Scripts\Game Flow\Elements.cs" />
+     <Compile Include="Assets\Game\Scripts\Game Flow\GameActions.cs" />
+     <Compile Include="Assets\Game\Scripts\Game Flow\GameConsts.cs" />
+     <Compile Include="Assets\Game\Scripts\Game Flow\Player.cs" />
      <Compile Include="Assets\Game\Scripts\Game Flow\PrefabAndInstanceContainer.cs" />
      <Compile Include="Assets\Game\Scripts\Game Flow\State Machine\ChooseElementsState.cs" />
      <Compile Include="Assets\Game\Scripts\Game Flow\State Machine\GameFSM.cs" />
      <Compile Include="Assets\Game\Scripts\Game Flow\State Machine\GameState.cs" />
+     <Compile Include="Assets\Game\Scripts\GizmoShow.cs" />
      <Compile Include="Assets\Game\Scripts\Input\Button.cs" />
      <Compile Include="Assets\Game\Scripts\Input\ConstLaserPointer.cs" />
      <Compile Include="Assets\Game\Scripts\Input\InputController.cs" />
@@ -238,6 +249,7 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
      <None Include="Assets\LeapMotion\Resources\ThresholdOverlay.shader" />
      <None Include="Assets\OVR\Moonlight\Resources\Unlit Transparent Color.shader" />
+<<<<<<< HEAD
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBlur.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\SSAOShader.shader" />
      <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
@@ -245,6 +257,9 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurvesSimple.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderYUV.shader" />
      <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonLit.shader" />
+=======
+     <None Include="Assets\Game\Shaders\dissolve.shader" />
+>>>>>>> refs/remotes/heyx3/master
      <None Include="Assets\LeapMotion\Resources\PassthroughForeground.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CreaseApply.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ChromaticAberrationShader.shader" />
@@ -259,6 +274,7 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlurDX11.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\SeparableBlurPlus.shader" />
      <None Include="Assets\LeapMotion\Widgets\Shaders\SelfIllumAlpha.shader" />
+<<<<<<< HEAD
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\CameraMotionBlur.shader" />
@@ -278,6 +294,9 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\VignettingShader.shader" />
      <None Include="Assets\FadeToSkybox\Shader\FadeToSkybox.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Tonemapper.shader" />
+=======
+     <None Include="Assets\Game\Materials\Cards\Fire Spacing.txt" />
+>>>>>>> refs/remotes/heyx3/master
      <None Include="Assets\LeapMotion\Version.txt" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BrightPassFilter.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAA2.shader" />

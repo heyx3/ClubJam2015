@@ -18,7 +18,12 @@ public class MoveTowards : MonoBehaviour
 	public float SeekingLerp { get; private set; }
 
 
-	public delegate void FinishedMovementDelegate();
+	public delegate void FinishedMovementDelegate(MoveTowards mt);
+
+	/// <summary>
+	/// This event clears itself out every time it's triggered.
+	/// Doesn't trigger (but does clear itself) when "SetTarget()" is called.
+	/// </summary>
 	public event FinishedMovementDelegate OnMovementFinished;
 
 
@@ -35,11 +40,24 @@ public class MoveTowards : MonoBehaviour
 		if (IsSeeking)
 		{
 			SeekingLerp += Time.deltaTime * (PathDistance / Speed);
+			MyTransform.position = Vector3.Lerp(StartPos, Target, SeekingLerp);
+
+			if (SeekingLerp >= 1.0f)
+			{
+				MyTransform.position = Target;
+
+				FinishedMovementDelegate evnt = OnMovementFinished;
+				OnMovementFinished = null;
+				if (evnt != null)
+					evnt(this);
+			}
 		}
 	}
 
 	public void SetTarget(Vector3 newTarget)
 	{
+		OnMovementFinished = null;
+
 		Target = newTarget;
 		IsSeeking = true;
 

@@ -14,6 +14,8 @@ public class ChooseElementsState : GameState
 
 		chosenElements.Clear();
 		PrefabAndInstanceContainer.Instance.ElementSelectionContainer.SetActive(true);
+
+		PrefabAndInstanceContainer.Instance.PlayerLookTarget = PrefabAndInstanceContainer.Instance.LookTarget_MyTable;
 	}
 	public override void OnLeavingState(GameState next)
 	{
@@ -30,21 +32,33 @@ public class ChooseElementsState : GameState
 			return;
 		}
 
-
 		chosenElements.Add(element);
 		button.IsSelected = true;
+		PrefabAndInstanceContainer.InstantiateAt(PrefabAndInstanceContainer.Instance.ParticlePrefab_ChooseElemental,
+												 button.MyTransform.position);
 
 		if (chosenElements.Count == 2)
 		{
-			FSM.ElementsByPlayer[0] = chosenElements.ToArray();
-			FSM.ElementsByPlayer[1] = AI.ChooseElements(FSM.ElementsByPlayer[0]);
+			FSM.Current = new Player(chosenElements[0], chosenElements[1], false);
+			Elements[] aiEls = AI.ChooseElements(chosenElements);
+			FSM.Opponent = new Player(aiEls[0], aiEls[1], true);
 
-			//TODO: Jump to next state.
-			FSM.CurrentState = null;
+			FSM.StartCoroutine(DealOutCoroutine());
 		}
 		else if (chosenElements.Count > 2)
 		{
 			Debug.LogError("More than two elements somehow! " + chosenElements.Count);
 		}
+	}
+	private static System.Collections.IEnumerator DealOutCoroutine()
+	{
+		yield return new WaitForSeconds(1.0f);
+
+		FSM.CurrentState = null;
+
+		yield return GameActions.DrawCardsToFull(FSM.Current);
+		yield return GameActions.DrawCardsToFull(FSM.Opponent);
+
+		//TODO: Switch to the state for the beginning of the turn.
 	}
 }

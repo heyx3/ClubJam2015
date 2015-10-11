@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class GameState
 {
-	protected GameFSM FSM { get { return GameFSM.Instance; } }
+	protected static GameFSM FSM { get { return GameFSM.Instance; } }
 
-	protected int CurrentPlayer { get { return FSM.CurrentPlayer; } set { FSM.CurrentPlayer = value; } }
+	protected static int CurrentPlayer { get { return FSM.CurrentPlayer; } set { FSM.CurrentPlayer = value; } }
 
 
 	public virtual void Update() { }
@@ -15,32 +15,18 @@ public abstract class GameState
 	
 	/// <summary>
 	/// Reacts to a sideways sweeping gesture.
-	/// Negative velocity is "left"; positive is "right".
-	/// Current position can be queried from the KinematicsTracker.
 	/// </summary>
-	/// <param name="duration">
-	/// The gesture that caused this event started this many seconds ago.
-	/// Will usually be a small fraction of a second.
-	/// </param>
-	public virtual void OnSweepSideways(KinematicsTracker moveHistory, float gestureVelocity, float duration) { }
+	public virtual void OnSweepSideways(KinematicsTracker palmMovement) { }
 	/// <summary>
 	/// Reacts to a vertical sweeping gesture.
-	/// Negative velocity is "down"; positive is "up".
-	/// Current position can be queried from the KinematicsTracker.
 	/// </summary>
-	/// <param name="duration">
-	/// The gesture that caused this event started this many seconds ago.
-	/// Will usually be a small fraction of a second.
-	/// </param>
-	public virtual void OnSweepVertical(KinematicsTracker moveHistory, float gestureVelocity, float duration) { }
+	public virtual void OnSweepVertical(KinematicsTracker palmMovement) { }
 	/// <summary>
 	/// Reacts to a forward/back sweeping gesture.
-	/// Negative velocity is "backwards"; positive is "forwards".
-	/// Current position can be queried from the KinematicsTracker.
 	/// </summary>
-	/// <param name="duration">
-	/// The gesture that caused this event started this many seconds ago.
-	/// Will usually be a small fraction of a second.
-	/// </param>
-	public virtual void OnSweepForward(KinematicsTracker moveHistory, float gestureVelocity, float duration) { }
+	public virtual void OnSweepForward(KinematicsTracker palmMovement) { }
+	/// <summary>
+	/// Reacts to a closing fist gesture.
+	/// </summary>
+	public virtual void OnCloseFist(KinematicsTracker palmMovement) { }
 }
