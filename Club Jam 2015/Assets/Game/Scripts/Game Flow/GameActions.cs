@@ -28,7 +28,7 @@ public class GameActions : Singleton<GameActions>
 	}
 
 
-	public IEnumerator DrawCard(Player p)
+	public static IEnumerator DrawCard(Player p)
 	{
 		if (p.Hand.Count > Consts.MaxHand)
 		{
@@ -93,7 +93,7 @@ public class GameActions : Singleton<GameActions>
 
 		yield break;
 	}
-	private MoveTowards MoveCardToDeck(Card c, Player p)
+	private static MoveTowards MoveCardToDeck(Card c, Player p)
 	{
 		p.DiscardPile.Remove(c);
 		p.Deck.Add(c);
@@ -124,7 +124,7 @@ public class GameActions : Singleton<GameActions>
 	/// Draws cards until the given player's hand is full.
 	/// This may end the game under certain conditions.
 	/// </summary>
-	public IEnumerable DrawCardsToFull(Player p)
+	public static IEnumerable DrawCardsToFull(Player p)
 	{
 		while (!FSM.IsGameOver && p.Hand.Count < Consts.MaxHand)
 			yield return DrawCard(p);

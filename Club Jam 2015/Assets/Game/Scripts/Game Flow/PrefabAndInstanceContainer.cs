@@ -7,6 +7,14 @@ using UnityEngine.VR;
 
 public class PrefabAndInstanceContainer : Singleton<PrefabAndInstanceContainer>
 {
+	public static Transform InstantiateAt(GameObject prefab, Vector3 pos)
+	{
+		Transform t = Instantiate(prefab).transform;
+		t.position = pos;
+		return t;
+	}
+
+
 	#region Card Prefabs
 
 	[Serializable]
@@ -21,6 +29,8 @@ public class PrefabAndInstanceContainer : Singleton<PrefabAndInstanceContainer>
 	#endregion
 
 	public Dictionary<Elements, GameObject> CardPrefabs;
+
+	public GameObject ParticlePrefab_ChooseElemental;
 
 	public GameObject ElementSelectionContainer;
 
@@ -53,6 +63,8 @@ public class PrefabAndInstanceContainer : Singleton<PrefabAndInstanceContainer>
 		Assert(LookTarget_MyTable, "LookTarget_MyTable");
 		Assert(LookTarget_DiscardPile, "LookTarget_DiscardPile");
 		Assert(LookTarget_Opponent, "LookTarget_Opponent");
+
+		Assert(ParticlePrefab_ChooseElemental, "ParticlePrefab_ChooseElemental");
 
 		PlayerLookTarget = LookTarget_MyTable;
 

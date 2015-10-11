@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class GameState
 {
-	protected GameFSM FSM { get { return GameFSM.Instance; } }
+	protected static GameFSM FSM { get { return GameFSM.Instance; } }
 
-	protected int CurrentPlayer { get { return FSM.CurrentPlayer; } set { FSM.CurrentPlayer = value; } }
+	protected static int CurrentPlayer { get { return FSM.CurrentPlayer; } set { FSM.CurrentPlayer = value; } }
 
 
 	public virtual void Update() { }

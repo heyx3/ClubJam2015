@@ -11,6 +11,8 @@ public static class CardBehavior
 
 
 	public delegate void CardAction();
+	public delegate void CardReaction();
+	public delegate bool CardPredicate(Card c);
 
 
 	public static Dictionary<string, CardAction> PrimaryActions = new Dictionary<string, CardAction>()
@@ -18,6 +20,14 @@ public static class CardBehavior
 
 	};
 	public static Dictionary<string, CardAction> SecondaryActions = new Dictionary<string, CardAction>()
+	{
+
+	};
+	public static Dictionary<string, CardPredicate> CanCounter = new Dictionary<string, CardPredicate>()
+	{
+
+	};
+	public static Dictionary<string, CardReaction> CounterActions = new Dictionary<string, CardReaction>()
 	{
 
 	};

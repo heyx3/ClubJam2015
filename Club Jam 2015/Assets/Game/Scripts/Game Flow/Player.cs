@@ -70,9 +70,11 @@ public class Player
 			Transform cT = GameObject.Instantiate<GameObject>(prefab).transform;
 
 			cT.parent = container;
-			cT.localPosition = new Vector3(0.0f, count * GameConsts.Instance.DeckCardSeparation, 0.0f);
+			cT.localPosition = new Vector3(0.0f, -count * GameConsts.Instance.DeckCardSeparation, 0.0f);
 			cT.parent = null;
 			cT.GetComponent<CardComponent>().MyCard = c;
+
+			count += 1;
 		}
 	}
 }

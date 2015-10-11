@@ -9,7 +9,10 @@ public class CardComponent : MonoBehaviour
 		get { return myCard; }
 		set
 		{
-			myCard.Owner = null;
+			if (myCard != null)
+			{
+				myCard.Owner = null;
+			}
 
 			myCard = value;
 

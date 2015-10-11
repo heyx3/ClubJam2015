@@ -32,9 +32,10 @@ public class ChooseElementsState : GameState
 			return;
 		}
 
-
 		chosenElements.Add(element);
 		button.IsSelected = true;
+		PrefabAndInstanceContainer.InstantiateAt(PrefabAndInstanceContainer.Instance.ParticlePrefab_ChooseElemental,
+												 button.MyTransform.position);
 
 		if (chosenElements.Count == 2)
 		{
@@ -42,12 +43,22 @@ public class ChooseElementsState : GameState
 			Elements[] aiEls = AI.ChooseElements(chosenElements);
 			FSM.Opponent = new Player(aiEls[0], aiEls[1], true);
 
-			//TODO: Switch to the next state.
-			FSM.CurrentState = null;
+			FSM.StartCoroutine(DealOutCoroutine());
 		}
 		else if (chosenElements.Count > 2)
 		{
 			Debug.LogError("More than two elements somehow! " + chosenElements.Count);
 		}
+	}
+	private static System.Collections.IEnumerator DealOutCoroutine()
+	{
+		yield return new WaitForSeconds(1.0f);
+
+		FSM.CurrentState = null;
+
+		yield return GameActions.DrawCardsToFull(FSM.Current);
+		yield return GameActions.DrawCardsToFull(FSM.Opponent);
+
+		//TODO: Switch to the state for the beginning of the turn.
 	}
 }
