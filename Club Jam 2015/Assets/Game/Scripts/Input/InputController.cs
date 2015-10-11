@@ -10,6 +10,9 @@ public class InputController : Singleton<InputController>
 {
 	private static Vector2 Horz(Vector3 v) { return new Vector2(v.x, v.z); }
 
+
+	public bool DisableAllGestures = false;
+
 	public KinematicsTracker.DebugData Debugging = new KinematicsTracker.DebugData();
 
 	public KinematicsTracker[] PalmTrackers = new KinematicsTracker[2] { null, null };
@@ -84,6 +87,9 @@ public class InputController : Singleton<InputController>
 
 	void Update()
 	{
+		if (DisableAllGestures)
+			return;
+
 		for (int i = 0; i < PalmTrackers.Length; ++i)
 		{
 			KinematicsTracker palmT = PalmTrackers[i],

@@ -20,6 +20,8 @@ public class GameFSM : Singleton<GameFSM>
 	/// </summary>
 	public Player Current, Opponent;
 	public bool IsAITurn { get { return Current.IsAI; } }
+	public Player HumanPlayer { get { return (IsAITurn ? Opponent : Current); } }
+	public Player AIPlayer { get { return (IsAITurn ? Current : Opponent); } }
 
 
 	public bool IsGameOver = false;

@@ -56,6 +56,12 @@ public class GameConsts : Singleton<GameConsts>
 
 	public float DeckCardSeparation = 0.01f;
 
+	public float DiscardForce = 1.0f;
+
+	public float ShuffleOutSpeed = 1.0f,
+				 ShuffleInSpeed = 0.25f;
+	public float ShuffleOutDist = 0.5f;
+
 	public float DrawCardStartHeight = 3.0f,
 				 DrawCardStartHeightVariance = 0.5f;
 	public float DrawCardMoveSpeed = 1.0f;

@@ -39,10 +39,16 @@ public class PrefabAndInstanceContainer : Singleton<PrefabAndInstanceContainer>
 					   AIHandMarkers = new Transform[5];
 
 	[NonSerialized]
+	public CardButton[] HandButtons;
+
+	[NonSerialized]
 	public Transform PlayerLookTarget;
 	public Transform MainCam;
 
-	public Transform LookTarget_MyTable, LookTarget_Opponent, LookTarget_DiscardPile;
+	public Transform LookTarget_MyTable, LookTarget_Opponent,
+					 LookTarget_DiscardLeft, LookTarget_DiscardRight;
+
+	public GameObject ChooseCharacterActionContainer;
 
 
 	private void Assert(object g, string objName)
@@ -61,10 +67,13 @@ public class PrefabAndInstanceContainer : Singleton<PrefabAndInstanceContainer>
 		Assert(AIPlayerDeckMarker, "AIPlayerDeckMarker");
 
 		Assert(LookTarget_MyTable, "LookTarget_MyTable");
-		Assert(LookTarget_DiscardPile, "LookTarget_DiscardPile");
+		Assert(LookTarget_DiscardLeft, "LookTarget_DiscardLeft");
+		Assert(LookTarget_DiscardRight, "LookTarget_DiscardRight");
 		Assert(LookTarget_Opponent, "LookTarget_Opponent");
 
 		Assert(ParticlePrefab_ChooseElemental, "ParticlePrefab_ChooseElemental");
+
+		Assert(ChooseCharacterActionContainer, "ChooseCharacterActionContainer");
 
 		PlayerLookTarget = LookTarget_MyTable;
 
@@ -73,6 +82,7 @@ public class PrefabAndInstanceContainer : Singleton<PrefabAndInstanceContainer>
 			Assert(HumanHandMarkers[i], "Human hand marker " + i);
 			Assert(AIHandMarkers[i], "AI hand marker " + i);
 		}
+		HandButtons = HumanHandMarkers.Select(t => t.GetComponentInChildren<CardButton>()).ToArray();
 
 		CardPrefabs = new Dictionary<Elements, GameObject>();
 		foreach (ElementAndCardPrefab eacp in cardPrefabs)
@@ -85,10 +95,12 @@ public class PrefabAndInstanceContainer : Singleton<PrefabAndInstanceContainer>
 		//Rotate the camera to face the look-at target.
 		if (!VRDevice.isPresent)
 		{
-			MainCam.transform.LookAt(Vector3.Lerp(MainCam.transform.forward,
-												  (PlayerLookTarget.position - MainCam.transform.position).normalized,
-												  GameConsts.Instance.CameraLookLerp).normalized,
-									 new Vector3(0.0f, 1.0f, 0.0f));
+			Vector3 targPos = PlayerLookTarget.position;
+			float dist = (targPos - MainCam.position).magnitude;
+			MainCam.LookAt(Vector3.Lerp(MainCam.position + (MainCam.forward * dist),
+										PlayerLookTarget.position,
+										GameConsts.Instance.CameraLookLerp),
+						   new Vector3(0.0f, 1.0f, 0.0f));
 		}
 	}
 }

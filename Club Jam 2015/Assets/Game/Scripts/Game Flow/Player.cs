@@ -32,6 +32,8 @@ public class Player
 		SecondChar = secondary;
 		IsAI = isAI;
 
+		HP = GameConsts.Instance.StartingHP;
+
 		//Generate energy.
 		Energy = new Dictionary<Elements, int>();
 		foreach (Elements el in Enum.GetValues(typeof(Elements)).Cast<Elements>())
@@ -62,17 +64,18 @@ public class Player
 		
 		//Create corresponding GameObjects.
 		int count = 0;
-		Transform container = (isAI ? PrefabAndInstanceContainer.Instance.AIPlayerDeckMarker :
-									  PrefabAndInstanceContainer.Instance.HumanPlayerDeckMarker);
+		Vector3 containerPos = (isAI ? PrefabAndInstanceContainer.Instance.AIPlayerDeckMarker :
+									   PrefabAndInstanceContainer.Instance.HumanPlayerDeckMarker).position;
 		foreach (Card c in Deck)
 		{
 			GameObject prefab = PrefabAndInstanceContainer.Instance.CardPrefabs[c.Type];
 			Transform cT = GameObject.Instantiate<GameObject>(prefab).transform;
 
-			cT.parent = container;
-			cT.localPosition = new Vector3(0.0f, -count * GameConsts.Instance.DeckCardSeparation, 0.0f);
-			cT.parent = null;
-			cT.GetComponent<CardComponent>().MyCard = c;
+			cT.position = containerPos + new Vector3(0.0f, count * GameConsts.Instance.DeckCardSeparation, 0.0f);
+			
+			CardComponent cmp = cT.GetComponent<CardComponent>();
+			cmp.MyCard = c;
+			cmp.IsFaceDown = true;
 
 			count += 1;
 		}

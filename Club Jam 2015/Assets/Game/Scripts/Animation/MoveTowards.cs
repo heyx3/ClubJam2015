@@ -39,7 +39,7 @@ public class MoveTowards : MonoBehaviour
 	{
 		if (IsSeeking)
 		{
-			SeekingLerp += Time.deltaTime * (PathDistance / Speed);
+			SeekingLerp += Time.deltaTime * (Speed / PathDistance);
 			MyTransform.position = Vector3.Lerp(StartPos, Target, SeekingLerp);
 
 			if (SeekingLerp >= 1.0f)
