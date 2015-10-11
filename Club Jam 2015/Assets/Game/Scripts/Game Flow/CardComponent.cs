@@ -29,6 +29,18 @@ public class CardComponent : MonoBehaviour
 
 
 	public bool IsSelected = false;
+	public bool IsFaceDown
+	{
+		get
+		{
+			return (MyTr.localScale.z < 0.0f);
+		}
+		set
+		{
+			if (value != IsFaceDown)
+				MyTr.localScale = new Vector3(MyTr.localScale.x, MyTr.localScale.y, -MyTr.localScale.z);
+		}
+	}
 
 	public Renderer CardRend;
 

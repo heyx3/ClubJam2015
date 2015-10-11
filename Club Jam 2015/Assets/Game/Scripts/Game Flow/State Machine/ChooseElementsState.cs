@@ -16,6 +16,9 @@ public class ChooseElementsState : GameState
 		PrefabAndInstanceContainer.Instance.ElementSelectionContainer.SetActive(true);
 
 		PrefabAndInstanceContainer.Instance.PlayerLookTarget = PrefabAndInstanceContainer.Instance.LookTarget_MyTable;
+
+		foreach (Transform t in PrefabAndInstanceContainer.Instance.HumanHandMarkers)
+			t.gameObject.SetActive(false);
 	}
 	public override void OnLeavingState(GameState next)
 	{
@@ -56,9 +59,9 @@ public class ChooseElementsState : GameState
 
 		FSM.CurrentState = null;
 
-		yield return GameActions.DrawCardsToFull(FSM.Current);
-		yield return GameActions.DrawCardsToFull(FSM.Opponent);
+		yield return FSM.StartCoroutine(GameActions.DrawCardsToFull(FSM.Current));
+		yield return FSM.StartCoroutine(GameActions.DrawCardsToFull(FSM.Opponent));
 
-		//TODO: Switch to the state for the beginning of the turn.
+		FSM.CurrentState = new ChooseToDiscardState();
 	}
 }
