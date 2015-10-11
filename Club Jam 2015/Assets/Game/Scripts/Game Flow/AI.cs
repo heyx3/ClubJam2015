@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public static class AI
 {
-	public static Elements[] ChooseElements(Elements[] playerElements)
+	public static Elements[] ChooseElements(List<Elements> playerElements)
 	{
 		Elements[] allElements = Enum.GetValues(typeof(Elements)).Cast<Elements>().ToArray();
 

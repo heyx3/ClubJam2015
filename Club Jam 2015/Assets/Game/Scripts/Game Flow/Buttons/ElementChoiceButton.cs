@@ -21,6 +21,26 @@ public class ElementChoiceButton : Button
 	private Vector3 normalScale;
 	private Transform tr;
 
+	private bool started = false;
+	void Start()
+	{
+		started = true;
+		OnEnable();
+	}
+	void OnEnable()
+	{
+		if (started)
+		{
+			InputController.Instance.OnCloseFist += GestureResponse;
+			InputController.Instance.OnSweepVertical += GestureResponse;
+		}
+	}
+	void OnDestroy() { OnDisable(); }
+	void OnDisable()
+	{
+		InputController.Instance.OnCloseFist -= GestureResponse;
+		InputController.Instance.OnSweepVertical -= GestureResponse;
+	}
 
 	protected override void Awake()
 	{
@@ -33,26 +53,18 @@ public class ElementChoiceButton : Button
 	{
 		base.Update();
 
-		bool isSelected = IsSelected;
-
-		//See if this button is being activated.
-		if (touching.Count > 0)
-		{
-			TouchTime += Time.deltaTime;
-
-			if (TouchTime >= TriggerTime)
-			{
-				ChooseElementsState state = (ChooseElementsState)GameFSM.Instance.CurrentState;
-				state.OnChosen(this, Choice);
-			}
-			else
-			{
-				isSelected = true;
-			}
-		}
-
-		//Smoothly the button based on whether it's selected.
+		//Smoothly scale the button based on whether it's selected.
+		bool isSelected = (IsSelected || touching.Count > 0);
 		Vector3 targetScale = (isSelected ? (normalScale * SelectedScale) : normalScale);
 		tr.localScale = Vector3.Lerp(tr.localScale, targetScale, ScaleSpeedLerp);
+	}
+
+	private void GestureResponse(KinematicsTracker palm)
+	{
+		if (touching.Contains(palm))
+		{
+			ChooseElementsState state = (ChooseElementsState)GameFSM.Instance.CurrentState;
+			state.OnChosen(this, Choice);
+		}
 	}
 }

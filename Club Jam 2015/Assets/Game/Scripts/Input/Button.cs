@@ -24,7 +24,7 @@ public abstract class Button : MonoBehaviour
 	}
 	protected virtual void Update()
 	{
-		foreach (KinematicsTracker tracker in InputController.Instance.Trackers)
+		foreach (KinematicsTracker tracker in InputController.Instance.PalmTrackers)
 		{
 			if (tracker != null)
 			{
@@ -59,8 +59,8 @@ public abstract class Button : MonoBehaviour
 				maxBox = minBox + HitBoxSize;
 
 		return ((pos - myPos).sqrMagnitude < (HitRadius * HitRadius)) ||
-			   (pos.x >= minBox.x && pos.y >= pos.y && pos.z >= minBox.z &&
-			    pos.x <= maxBox.x && pos.y <= pos.y && pos.z <= maxBox.z);
+			   (pos.x >= minBox.x && pos.y >= minBox.y && pos.z >= minBox.z &&
+			    pos.x <= maxBox.x && pos.y <= maxBox.y && pos.z <= maxBox.z);
 	}
 
 	protected virtual void OnDrawGizmosSelected()

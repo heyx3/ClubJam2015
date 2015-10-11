@@ -16,15 +16,13 @@ public class GameFSM : Singleton<GameFSM>
 
 
 	/// <summary>
-	/// The first index is the player. The second is the element.
-	/// The first element is the one currently out.
+	/// Two players: the current one, and his opponent.
 	/// </summary>
-	public Elements[][] ElementsByPlayer = new Elements[2][] { new Elements[2], new Elements[2], };
+	public Player Current, Opponent;
+	public bool IsAITurn { get { return Current.IsAI; } }
 
-	public Elements CurrentPlayerActiveElement { get { return ElementsByPlayer[CurrentPlayer][0]; } }
-	public Elements CurrentPlayerPassiveElement { get { return ElementsByPlayer[CurrentPlayer][1]; } }
-	public Elements OtherPlayerActiveElement { get { return ElementsByPlayer[OtherPlayer][0]; } }
-	public Elements OtherPlayerPassiveElement { get { return ElementsByPlayer[OtherPlayer][1]; } }
+
+	public bool IsGameOver = false;
 
 
 	public GameState CurrentState
@@ -53,5 +51,36 @@ public class GameFSM : Singleton<GameFSM>
 		base.Awake();
 
 		CurrentState = new ChooseElementsState();
+	}
+	void Start()
+	{
+		InputController.Instance.OnSweepSideways += t =>
+			{
+				if (CurrentState != null)
+				{
+					CurrentState.OnSweepSideways(t);
+				}
+			};
+		InputController.Instance.OnSweepForward += t =>
+			{
+				if (CurrentState != null)
+				{
+					CurrentState.OnSweepForward(t);
+				}
+			};
+		InputController.Instance.OnSweepVertical += t =>
+			{
+				if (CurrentState != null)
+				{
+					CurrentState.OnSweepVertical(t);
+				}
+			};
+		InputController.Instance.OnCloseFist += t =>
+			{
+				if (CurrentState != null)
+				{
+					CurrentState.OnCloseFist(t);
+				}
+			};
 	}
 }
