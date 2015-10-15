@@ -7,6 +7,8 @@ Project("{DD5746C4-4509-DFDC-6425-1467DD1D39C2}") = "Club Jam 2015", "Assembly-C
 EndProject
 Project("{DD5746C4-4509-DFDC-6425-1467DD1D39C2}") = "Club Jam 2015", "Assembly-CSharp-Editor.csproj", "{BE5E32D4-DE13-F6D4-7FDC-568F3F2DC879}"
 EndProject
+Project("{DD5746C4-4509-DFDC-6425-1467DD1D39C2}") = "Club Jam 2015", "Assembly-UnityScript-firstpass.unityproj", "{D3273DCA-4530-CC1D-0AB7-2E9361FC8929}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,11 +27,15 @@ Global
 		{BE5E32D4-DE13-F6D4-7FDC-568F3F2DC879}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE5E32D4-DE13-F6D4-7FDC-568F3F2DC879}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE5E32D4-DE13-F6D4-7FDC-568F3F2DC879}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3273DCA-4530-CC1D-0AB7-2E9361FC8929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3273DCA-4530-CC1D-0AB7-2E9361FC8929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3273DCA-4530-CC1D-0AB7-2E9361FC8929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3273DCA-4530-CC1D-0AB7-2E9361FC8929}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																	GlobalSection(MonoDevelopProperties) = preSolution
+				GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

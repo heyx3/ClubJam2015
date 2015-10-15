@@ -26,6 +26,6 @@ public class Hover : MonoBehaviour
 		float lerp = Amplitude * Mathf.Sin(Time.timeSinceLevelLoad * Speed);
 		lerp = Mathf.Sign(lerp) * Mathf.Pow(Mathf.Abs(lerp), MovementSmoothness);
 
-		tr.position = Vector3.LerpUnclamped(BasePos, BasePos + Direction, lerp);
+		//tr.position = Vector3.LerpUnclamped(BasePos, BasePos + Direction, lerp);
 	}
 }

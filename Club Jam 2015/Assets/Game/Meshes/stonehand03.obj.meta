@@ -1,0 +1,156 @@
+fileFormatVersion: 2
+guid: 103f4fa8005326b4283415fdcabe6593
+timeCreated: 1444575041
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: palm
+    100002: palm_handSphere
+    100004: palm_index01
+    100006: palm_index01_index_02
+    100008: palm_index01_index_02_index_03
+    100010: palm_middle_01
+    100012: palm_middle_01_middle_02
+    100014: palm_middle_01_middle_02_middle_03
+    100016: palm_pinkie_01
+    100018: palm_pinkie_01_pinkie_02
+    100020: palm_pinkie_01_pinkie_02_pinkie_03
+    100022: palm_ring_01
+    100024: palm_ring_01_ring_02
+    100026: palm_ring_01_ring_02_ring_03
+    100028: palm_thumb_01
+    100030: palm_thumb_01_thumb_02
+    100032: palm_thumb_01_thumb_02_thumb_03
+    100034: //RootNode
+    400000: palm
+    400002: palm_handSphere
+    400004: palm_index01
+    400006: palm_index01_index_02
+    400008: palm_index01_index_02_index_03
+    400010: palm_middle_01
+    400012: palm_middle_01_middle_02
+    400014: palm_middle_01_middle_02_middle_03
+    400016: palm_pinkie_01
+    400018: palm_pinkie_01_pinkie_02
+    400020: palm_pinkie_01_pinkie_02_pinkie_03
+    400022: palm_ring_01
+    400024: palm_ring_01_ring_02
+    400026: palm_ring_01_ring_02_ring_03
+    400028: palm_thumb_01
+    400030: palm_thumb_01_thumb_02
+    400032: palm_thumb_01_thumb_02_thumb_03
+    400034: //RootNode
+    2300000: palm
+    2300002: palm_handSphere
+    2300004: palm_index01
+    2300006: palm_index01_index_02
+    2300008: palm_index01_index_02_index_03
+    2300010: palm_middle_01
+    2300012: palm_middle_01_middle_02
+    2300014: palm_middle_01_middle_02_middle_03
+    2300016: palm_pinkie_01
+    2300018: palm_pinkie_01_pinkie_02
+    2300020: palm_pinkie_01_pinkie_02_pinkie_03
+    2300022: palm_ring_01
+    2300024: palm_ring_01_ring_02
+    2300026: palm_ring_01_ring_02_ring_03
+    2300028: palm_thumb_01
+    2300030: palm_thumb_01_thumb_02
+    2300032: palm_thumb_01_thumb_02_thumb_03
+    3300000: palm
+    3300002: palm_handSphere
+    3300004: palm_index01
+    3300006: palm_index01_index_02
+    3300008: palm_index01_index_02_index_03
+    3300010: palm_middle_01
+    3300012: palm_middle_01_middle_02
+    3300014: palm_middle_01_middle_02_middle_03
+    3300016: palm_pinkie_01
+    3300018: palm_pinkie_01_pinkie_02
+    3300020: palm_pinkie_01_pinkie_02_pinkie_03
+    3300022: palm_ring_01
+    3300024: palm_ring_01_ring_02
+    3300026: palm_ring_01_ring_02_ring_03
+    3300028: palm_thumb_01
+    3300030: palm_thumb_01_thumb_02
+    3300032: palm_thumb_01_thumb_02_thumb_03
+    4300000: palm
+    4300002: palm_handSphere
+    4300004: palm_index01
+    4300006: palm_index01_index_02
+    4300008: palm_index01_index_02_index_03
+    4300010: palm_middle_01
+    4300012: palm_middle_01_middle_02
+    4300014: palm_middle_01_middle_02_middle_03
+    4300016: palm_pinkie_01
+    4300018: palm_pinkie_01_pinkie_02
+    4300020: palm_pinkie_01_pinkie_02_pinkie_03
+    4300022: palm_ring_01
+    4300024: palm_ring_01_ring_02
+    4300026: palm_ring_01_ring_02_ring_03
+    4300028: palm_thumb_01
+    4300030: palm_thumb_01_thumb_02
+    4300032: palm_thumb_01_thumb_02_thumb_03
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
